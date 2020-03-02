@@ -1,8 +1,8 @@
 {
-  "name": "swap-position",
+  "name": "move-position",
   "version": "0.0.0",
   "main": "index.js",
-  "repository": "https://github.com/jalal246/swap-position.git",
+  "repository": "https://github.com/jalal246/move-position.git",
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "LGPL-3.0",
   "scripts": {
@@ -15,7 +15,7 @@
     "README.md"
   ],
   "keywords": [
-    "swap-position",
+    "move-position",
     "corename",
     "get-info",
     "builderz",
