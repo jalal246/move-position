@@ -1,3 +1,11 @@
+/**
+ *
+ *
+ * @param {*} arr
+ * @param {*} from
+ * @param {*} to
+ * @returns
+ */
 function isNotInRange(arr, from, to) {
   const { length } = arr;
 
@@ -11,6 +19,15 @@ function isNotInRange(arr, from, to) {
   );
 }
 
+/**
+ * Move element form/to
+ *
+ * @param {Array} [arr=[]]
+ * @param {number} from
+ * @param {number} to
+ * @param {boolean} [isMutate=true]
+ * @returns {Array}
+ */
 function move(arr = [], from, to, isMutate = true) {
   if (isNotInRange(arr, from, to)) return arr;
 
@@ -21,6 +38,15 @@ function move(arr = [], from, to, isMutate = true) {
   return modified;
 }
 
+/**
+ * Move multiple arrays element from the same index.
+ *
+ * @param {Array} [arr=[]] array contain arrays to be changed
+ * @param {number} from
+ * @param {number} to
+ * @param {boolean} [isMutate=true]
+ * @returns {Array}
+ */
 function moveMultiple(multiArr, from, to, isMutate) {
   return multiArr.map(arr => move(arr, from, to, isMutate));
 }
