@@ -1,6 +1,6 @@
 # move-position
 
-> move element in given array form position A to position B :scissors:
+> move element in given array form index-A to index-B :scissors:
 
 ```bash
 npm install move-position
@@ -24,18 +24,18 @@ const modifiedArr = move(arr, from, to, isMutate);
 ### Example(1)
 
 ```js
-const input = ["a1", "b1", "c1"];
+const input = ["a", "b", "c"];
 
 // move element form index:0 to index:2
 const result = move(input, 0, 2);
 
-// ["b1", "c1", "a1"];
+// ["b", "c", "a"];
 ```
 
 ## moveMultiple
 
 ```js
-const modifiedArr = moveMultiple([arr1, arr2], from, to, isMutate);
+const modifiedArr = moveMultiple([arr1, arr2, ...], from, to, isMutate);
 ```
 
 ### Example(2)
