@@ -39,11 +39,11 @@ function move(arr = [], from, to, isMutate = true) {
 }
 
 /**
- * Moves multiple arrays element from the same index.
+ * Moves the same index in multiple arrays
  *
- * @param {Array} [arr=[]] array contain arrays to be changed
- * @param {number} from
- * @param {number} to
+ * @param {Array} [arr=[]] Array contain arrays to be changed
+ * @param {number} from - targeted index
+ * @param {number} to - targeted index
  * @param {boolean} [isMutate=true]
  * @returns {Array}
  */
