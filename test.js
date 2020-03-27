@@ -1,6 +1,6 @@
 const { expect } = require("chai");
 
-const { move, moveMultiple } = require("./index");
+const { move, moveMultiArr, moveMultiIndex } = require("./index");
 
 describe("move-position", () => {
   it("returns the same input when params is invalid", () => {
@@ -13,7 +13,7 @@ describe("move-position", () => {
     expect(result2).to.have.ordered.members(input);
   });
 
-  it("move with mutation (default)", () => {
+  it("moves with mutation (default)", () => {
     const input = ["a1", "b1", "c1"];
 
     const result = move(input, 0, 2);
@@ -23,7 +23,7 @@ describe("move-position", () => {
     expect(input).to.have.ordered.members(expected);
   });
 
-  it("move without mutation", () => {
+  it("moves without mutation", () => {
     const input = ["a1", "b1", "c1"];
 
     const result = move(input, 0, 2, false);
@@ -33,13 +33,13 @@ describe("move-position", () => {
     expect(input).to.have.ordered.members(input);
   });
 
-  it("move multiple arrays with mutation (default)", () => {
+  it("moves multiple arrays with mutation (default)", () => {
     const input1 = ["a1", "b1", "c1"];
     const input2 = ["a2", "b2", "c2"];
 
     const total = [input1, input2];
 
-    const result = moveMultiple(total, 2, 0);
+    const result = moveMultiArr(total, 2, 0);
 
     const expectedInput1 = ["c1", "a1", "b1"];
     const expectedInput2 = ["c2", "a2", "b2"];
@@ -49,17 +49,44 @@ describe("move-position", () => {
     expect(input1).to.have.ordered.members(result[0]);
   });
 
-  it("move multiple arrays without mutation", () => {
+  it("moves multiple arrays without mutation", () => {
     const input1 = ["a1", "b1", "c1"];
     const input2 = ["a2", "b2", "c2"];
 
     const total = [input1, input2];
 
-    const result = moveMultiple(total, 2, 0, false);
+    const result = moveMultiArr(total, 2, 0, false);
 
     const expectedInput1 = ["c1", "a1", "b1"];
 
     expect(result[0]).to.have.deep.members(expectedInput1);
     expect(input1).to.not.have.ordered.members(result[0]);
+  });
+
+  it("tests with movingMap: Apply multi changes to same array", () => {
+    const input = [
+      "folo-forms",
+      "folo-layout",
+      "folo-utils",
+      "folo-withcontext"
+    ];
+
+    const movingMap = [
+      { from: 2, to: 0 },
+      { from: 3, to: 1 },
+      { from: 1, to: 2 },
+      { from: 0, to: 3 }
+    ];
+
+    const result = moveMultiIndex(input, movingMap);
+
+    const expected = [
+      "folo-utils",
+      "folo-withcontext",
+      "folo-layout",
+      "folo-forms"
+    ];
+
+    expect(result).to.have.deep.members(expected);
   });
 });
