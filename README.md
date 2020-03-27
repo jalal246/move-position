@@ -1,6 +1,6 @@
 # move-position
 
-> move element in given array form index-A to index-B :scissors:
+> Move element in given array form index-A to index-B :scissors:
 
 ```bash
 npm install move-position
@@ -26,7 +26,7 @@ const modifiedArr = move(arr, from, to, isMutate);
 ```js
 const input = ["a", "b", "c"];
 
-// move element form index:0 to index:2
+// move element form index=0, to index=2
 const result = move(input, 0, 2);
 
 // ["b", "c", "a"];
@@ -53,9 +53,9 @@ const modifiedArr = moveMultiArr([arr1, arr2, ...], from, to, isMutate);
 const input1 = ["a1", "b1", "c1"];
 const input2 = ["a2", "b2", "c2"];
 
-const allInputs = [input1, input2];
+const inputs = [input1, input2];
 
-const result = moveMultiArr(allInputs, 2, 0);
+const result = moveMultiArr(inputs, 2, 0);
 
 // result[0] > ["c1", "a1", "b1"];
 // result[1] > ["c2", "a2", "b2"];
@@ -65,7 +65,7 @@ const result = moveMultiArr(allInputs, 2, 0);
 
 ```js
 /**
- * Moves multiple indexes in the same array.
+ * Moves multiple indexes in the same array
  *
  * @param {Array} [arr=[]]
  * @param {{ from, to }[]} movingMap
