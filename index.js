@@ -1,9 +1,9 @@
 /**
+ * validator
  *
- *
- * @param {*} arr
- * @param {*} from
- * @param {*} to
+ * @param {Array} arr - array to validate
+ * @param {number} from - targeted index
+ * @param {number} to - targeted index
  * @returns
  */
 function isNotInRange(arr, from, to) {
@@ -20,7 +20,7 @@ function isNotInRange(arr, from, to) {
 }
 
 /**
- * Move element form/to
+ * Moves element form/to index.
  *
  * @param {Array} [arr=[]]
  * @param {number} from
@@ -39,7 +39,7 @@ function move(arr = [], from, to, isMutate = true) {
 }
 
 /**
- * Move multiple arrays element from the same index.
+ * Moves multiple arrays element from the same index.
  *
  * @param {Array} [arr=[]] array contain arrays to be changed
  * @param {number} from
@@ -47,11 +47,29 @@ function move(arr = [], from, to, isMutate = true) {
  * @param {boolean} [isMutate=true]
  * @returns {Array}
  */
-function moveMultiple(multiArr, from, to, isMutate) {
+function moveMultiArr(multiArr, from, to, isMutate) {
   return multiArr.map(arr => move(arr, from, to, isMutate));
+}
+
+/**
+ * Moves multiple indexes in the same array.
+ *
+ * @param {Array} [arr=[]]
+ * @param {{ from, to }[]} movingMap
+ * @returns {Array} new Array with index changes
+ */
+function moveMultiIndex(arr = [], movingMap) {
+  const modified = arr.slice();
+
+  movingMap.forEach(({ from, to }) => {
+    modified[to] = arr[from];
+  });
+
+  return modified;
 }
 
 module.exports = {
   move,
-  moveMultiple
+  moveMultiArr,
+  moveMultiIndex
 };
