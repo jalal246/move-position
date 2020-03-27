@@ -68,7 +68,7 @@ const result = moveMultiArr(inputs, 2, 0);
  * Moves multiple indexes in the same array
  *
  * @param {Array} [arr=[]]
- * @param {{ from, to }[]} movingMap
+ * @param {Object[]} movingMap
  * @returns {Array} new Array with index changes
  */
 const modifiedArr = moveMultiIndex(arr, [{from, to}, ...]);
