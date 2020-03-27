@@ -1,6 +1,6 @@
 # move-position
 
-> move element in given array form index-A to index-B :scissors:
+> Move element in given array form index-A to index-B :scissors:
 
 ```bash
 npm install move-position
@@ -10,7 +10,7 @@ npm install move-position
 
 ```js
 /**
- * Move element form/to
+ * Moves element form/to index.
  *
  * @param {Array} [arr=[]]
  * @param {number} from
@@ -26,16 +26,25 @@ const modifiedArr = move(arr, from, to, isMutate);
 ```js
 const input = ["a", "b", "c"];
 
-// move element form index:0 to index:2
+// move element form index=0, to index=2
 const result = move(input, 0, 2);
 
 // ["b", "c", "a"];
 ```
 
-## moveMultiple
+## moveMultiArr
 
 ```js
-const modifiedArr = moveMultiple([arr1, arr2, ...], from, to, isMutate);
+/**
+ * Moves the same index in multiple arrays
+ *
+ * @param {Array} [arr=[]] Array contain arrays to be changed
+ * @param {number} from - targeted index
+ * @param {number} to - targeted index
+ * @param {boolean} [isMutate=true]
+ * @returns {Array}
+ */
+const modifiedArr = moveMultiArr([arr1, arr2, ...], from, to, isMutate);
 ```
 
 ### Example(2)
@@ -44,12 +53,40 @@ const modifiedArr = moveMultiple([arr1, arr2, ...], from, to, isMutate);
 const input1 = ["a1", "b1", "c1"];
 const input2 = ["a2", "b2", "c2"];
 
-const total = [input1, input2];
+const inputs = [input1, input2];
 
-const result = moveMultiple(total, 2, 0);
+const result = moveMultiArr(inputs, 2, 0);
 
 // result[0] > ["c1", "a1", "b1"];
 // result[1] > ["c2", "a2", "b2"];
+```
+
+## moveMultiIndex
+
+```js
+/**
+ * Moves multiple indexes in the same array
+ *
+ * @param {Array} [arr=[]]
+ * @param {{ from, to }[]} movingMap
+ * @returns {Array} new Array with index changes
+ */
+const modifiedArr = moveMultiIndex(arr, [{from, to}, ...]);
+```
+
+### Example(3)
+
+```js
+const input = ["a", "b", "c"];
+
+const movingMap = [
+  { from: 0, to: 2 },
+  { from: 2, to: 1 }
+];
+
+const result = moveMultiIndex(input, movingMap);
+
+// result > [ 'a', 'c', 'a' ]
 ```
 
 ### Related projects
@@ -61,7 +98,10 @@ const result = moveMultiple(total, 2, 0);
 
 - [corename](https://github.com/jalal246/corename) - Extracts package name.
 
-- [get-info](https://github.com/jalal246/get-info) - Utility functions for projects production.
+- [get-info](https://github.com/jalal246/get-info) - Utility functions for
+  projects production.
+
+- [textics](https://github.com/jalal246/textics) & [textics-stream](https://github.com/jalal246/textics-stream) - Counts lines, words, chars and spaces for a given string.
 
 ## Tests
 
