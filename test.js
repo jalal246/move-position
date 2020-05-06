@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const { expect } = require("chai");
 
 const { move, moveMultiArr, moveMultiIndex } = require("./index");
@@ -19,6 +20,7 @@ describe("move-position", () => {
     const result = move(input, 0, 2);
 
     const expected = ["b1", "c1", "a1"];
+
     expect(result).to.have.ordered.members(expected);
     expect(input).to.have.ordered.members(expected);
   });
@@ -68,14 +70,14 @@ describe("move-position", () => {
       "folo-forms",
       "folo-layout",
       "folo-utils",
-      "folo-withcontext"
+      "folo-withcontext",
     ];
 
     const movingMap = [
       { from: 2, to: 0 },
       { from: 3, to: 1 },
       { from: 1, to: 2 },
-      { from: 0, to: 3 }
+      { from: 0, to: 3 },
     ];
 
     const result = moveMultiIndex(input, movingMap);
@@ -84,7 +86,7 @@ describe("move-position", () => {
       "folo-utils",
       "folo-withcontext",
       "folo-layout",
-      "folo-forms"
+      "folo-forms",
     ];
 
     expect(result).to.have.deep.members(expected);
