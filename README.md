@@ -16,7 +16,7 @@ Moves element form one index to another
 move(targetedArr: Array, from: number, to: number, isMutate?: boolean)
 ```
 
-#### Example - Mutate true
+If mutate true:
 
 ```js
 const input = ["a", "b", "c"];
@@ -33,7 +33,7 @@ Since `isMutate` is `true` by default:
 input === result; // true
 ```
 
-#### Example - Mutate false
+when mutate is false:
 
 ```js
 const result = move(input, 0, 2, false);
@@ -49,7 +49,7 @@ Moves the same index in multiple arrays
 moveMultiArr(targetedArr: Array<Array>, from: number, to: number, isMutate?: boolean)
 ```
 
-#### Example - Move Multiple Arrays
+#### Usage
 
 ```js
 const input1 = ["a1", "b1", "c1"];
@@ -69,17 +69,17 @@ const result = moveMultiArr([input1, input2], 2, 0);
 moveMultiArr(targetedArr: Array, movingMap: Array <FromToObj>)
 ```
 
-#### Example - Move Multiple Index
+Note that it deals by `FromToObj` as a map to navigate each element to its new position
 
 ```js
 const input = ["a", "b", "c"];
 
-const movingMap = [
+const FromToObj = [
   { from: 0, to: 2 },
   { from: 2, to: 1 },
 ];
 
-const result = moveMultiIndex(input, movingMap);
+const result = moveMultiIndex(input, FromToObj);
 
 // result = ["a", "c", "a"];
 ```
