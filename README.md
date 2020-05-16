@@ -1,6 +1,6 @@
 # move-position
 
-> Move element in given array form index-A to index-B :scissors:
+> Move element in a given array from one Index to another. It can be implemented for one array or multiple arrays with multiple indexes.
 
 ```bash
 npm install move-position
