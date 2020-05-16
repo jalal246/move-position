@@ -1,6 +1,6 @@
 # move-position
 
-> Move element in given array form index-A to index-B :scissors:
+> Move element in a given array from one Index to another. It can be implemented for one array or multiple arrays with multiple indexes.
 
 ```bash
 npm install move-position
@@ -16,7 +16,7 @@ Moves element form one index to another
 move(targetedArr: Array, from: number, to: number, isMutate?: boolean)
 ```
 
-#### Example - Mutate true
+If mutate true:
 
 ```js
 const input = ["a", "b", "c"];
@@ -33,7 +33,7 @@ Since `isMutate` is `true` by default:
 input === result; // true
 ```
 
-#### Example - Mutate false
+When mutate is false:
 
 ```js
 const result = move(input, 0, 2, false);
@@ -49,7 +49,7 @@ Moves the same index in multiple arrays
 moveMultiArr(targetedArr: Array<Array>, from: number, to: number, isMutate?: boolean)
 ```
 
-#### Example - Move Multiple Arrays
+Iteration through multiple arrays can easily be done with one step only as following:
 
 ```js
 const input1 = ["a1", "b1", "c1"];
@@ -69,17 +69,17 @@ const result = moveMultiArr([input1, input2], 2, 0);
 moveMultiArr(targetedArr: Array, movingMap: Array <FromToObj>)
 ```
 
-#### Example - Move Multiple Index
+Think about `FromToObj` as a map helps to navigate each element to its new position:
 
 ```js
 const input = ["a", "b", "c"];
 
-const movingMap = [
+const FromToObj = [
   { from: 0, to: 2 },
   { from: 2, to: 1 },
 ];
 
-const result = moveMultiIndex(input, movingMap);
+const result = moveMultiIndex(input, FromToObj);
 
 // result = ["a", "c", "a"];
 ```
@@ -93,22 +93,3 @@ npm test
 ## License
 
 This project is licensed under the [GPL-3.0 License](https://github.com/jalal246/move-position/blob/master/LICENSE)
-
-### Related projects
-
-- [packageSorter](https://github.com/jalal246/packageSorter) - Sorting packages
-  for monorepos production.
-
-- [builderz](https://github.com/jalal246/builderz) - Building your project with zero config.
-
-- [corename](https://github.com/jalal246/corename) - Extracts package name.
-
-- [get-info](https://github.com/jalal246/get-info) - Utility functions for
-  projects production.
-
-- [textics](https://github.com/jalal246/textics) &
-  [textics-stream](https://github.com/jalal246/textics-stream) - Counts lines,
-  words, chars and spaces for a given string.
-
-- [folo](https://github.com/jalal246/folo) - Form & Layout Components Built with
-  React.
