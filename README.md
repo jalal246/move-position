@@ -84,8 +84,9 @@ const result = moveMultiIndex(input, FromToObj);
 // result = ["a", "c", "a"];
 ```
 
-Validation functions is also exported `isValid(array, { from, to })` and it
-returns `false` when:
+Validation function is also exported:
+
+`isValid(array, { from, to })` and it returns `false` when:
 
 - input is not array
 - input array is empty
