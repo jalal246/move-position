@@ -20,6 +20,10 @@ function isNotInRange(arr, { from, to } = {}) {
   );
 }
 
+function isValid(arr, form2Obj) {
+  return !isNotInRange.call(this, arr, form2Obj);
+}
+
 /**
  * Moves element form/to index.
  *
@@ -70,7 +74,7 @@ function moveMultiIndex(arr = [], movingMap) {
 }
 
 module.exports = {
-  isNotInRange,
+  isValid,
   move,
   moveMultiArr,
   moveMultiIndex,
