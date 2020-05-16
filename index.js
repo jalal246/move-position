@@ -6,10 +6,11 @@
  * @param {number} to - targeted index
  * @returns
  */
-function isNotInRange(arr, from, to) {
+function isNotInRange(arr, { from, to } = {}) {
   const { length } = arr;
 
   return (
+    !Array.isArray(arr) ||
     typeof from !== "number" ||
     typeof to !== "number" ||
     from < 0 ||
@@ -17,6 +18,10 @@ function isNotInRange(arr, from, to) {
     to > length ||
     from > length
   );
+}
+
+function isValid(arr, form2Obj) {
+  return !isNotInRange.call(this, arr, form2Obj);
 }
 
 /**
@@ -29,7 +34,7 @@ function isNotInRange(arr, from, to) {
  * @returns {Array}
  */
 function move(arr = [], from, to, isMutate = true) {
-  if (isNotInRange(arr, from, to)) return arr;
+  if (isNotInRange(arr, { from, to })) return arr;
 
   const modified = isMutate ? arr : arr.slice();
 
@@ -48,7 +53,7 @@ function move(arr = [], from, to, isMutate = true) {
  * @returns {Array}
  */
 function moveMultiArr(multiArr, from, to, isMutate) {
-  return multiArr.map(arr => move(arr, from, to, isMutate));
+  return multiArr.map((arr) => move(arr, from, to, isMutate));
 }
 
 /**
@@ -69,7 +74,8 @@ function moveMultiIndex(arr = [], movingMap) {
 }
 
 module.exports = {
+  isValid,
   move,
   moveMultiArr,
-  moveMultiIndex
+  moveMultiIndex,
 };

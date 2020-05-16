@@ -84,6 +84,25 @@ const result = moveMultiIndex(input, FromToObj);
 // result = ["a", "c", "a"];
 ```
 
+Validation function is also exported:
+
+`isValid(array, { from, to })` and it returns `false` when:
+
+- input is not array
+- input array is empty
+- from/to is out of range
+- from/to is not numbers
+
+```js
+isValid([1, 2, 3], { from: 0, to: 1 });
+
+// true
+
+isValid([1, 2, 3], { from: 10, to: 1 });
+
+// false
+```
+
 ## Tests
 
 ```sh

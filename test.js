@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { expect } = require("chai");
 
-const { move, moveMultiArr, moveMultiIndex } = require("./index");
+const { move, moveMultiArr, moveMultiIndex, isValid } = require("./index");
 
 describe("move-position", () => {
   it("returns the same input when params is invalid", () => {
@@ -90,5 +90,45 @@ describe("move-position", () => {
     ];
 
     expect(result).to.have.deep.members(expected);
+  });
+});
+
+describe("tests validation", () => {
+  describe("detects invalid returns false:", () => {
+    it("when not array", () => {
+      const result = isValid("foo");
+      expect(result).to.be.equal(false);
+    });
+
+    it("when array is empty", () => {
+      const result = isValid([]);
+      expect(result).to.be.equal(false);
+    });
+
+    it("when from/to is out of range", () => {
+      let result = isValid([1, 2, 3], { from: -4, to: 0 });
+      expect(result).to.be.equal(false);
+
+      result = isValid([1, 2, 3], { from: 4, to: 0 });
+      expect(result).to.be.equal(false);
+
+      result = isValid([1, 2, 3], { from: 1, to: 6 });
+      expect(result).to.be.equal(false);
+
+      result = isValid([1, 2, 3], { from: 1, to: -6 });
+      expect(result).to.be.equal(false);
+    });
+
+    it("when from/to is not numbers", () => {
+      const result = isValid([1, 2, 3], { from: "1", to: "0" });
+      expect(result).to.be.equal(false);
+    });
+  });
+
+  describe("detects valid returns true:", () => {
+    it("when valid array", () => {
+      const result = isValid([1, 2, 3], { from: 0, to: 1 });
+      expect(result).to.be.equal(true);
+    });
   });
 });
