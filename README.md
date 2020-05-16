@@ -33,7 +33,7 @@ Since `isMutate` is `true` by default:
 input === result; // true
 ```
 
-when mutate is false:
+When mutate is false:
 
 ```js
 const result = move(input, 0, 2, false);
@@ -49,7 +49,7 @@ Moves the same index in multiple arrays
 moveMultiArr(targetedArr: Array<Array>, from: number, to: number, isMutate?: boolean)
 ```
 
-#### Usage
+Iteration through multiple arrays can easily be done with one step only as following:
 
 ```js
 const input1 = ["a1", "b1", "c1"];
@@ -69,7 +69,7 @@ const result = moveMultiArr([input1, input2], 2, 0);
 moveMultiArr(targetedArr: Array, movingMap: Array <FromToObj>)
 ```
 
-Note that it deals by `FromToObj` as a map to navigate each element to its new position
+Think about `FromToObj` as a map helps to navigate each element to its new position:
 
 ```js
 const input = ["a", "b", "c"];
