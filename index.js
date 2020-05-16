@@ -6,10 +6,11 @@
  * @param {number} to - targeted index
  * @returns
  */
-function isNotInRange(arr, from, to) {
+function isNotInRange(arr, { from, to } = {}) {
   const { length } = arr;
 
   return (
+    !Array.isArray(arr) ||
     typeof from !== "number" ||
     typeof to !== "number" ||
     from < 0 ||
@@ -29,7 +30,7 @@ function isNotInRange(arr, from, to) {
  * @returns {Array}
  */
 function move(arr = [], from, to, isMutate = true) {
-  if (isNotInRange(arr, from, to)) return arr;
+  if (isNotInRange(arr, { from, to })) return arr;
 
   const modified = isMutate ? arr : arr.slice();
 
@@ -48,7 +49,7 @@ function move(arr = [], from, to, isMutate = true) {
  * @returns {Array}
  */
 function moveMultiArr(multiArr, from, to, isMutate) {
-  return multiArr.map(arr => move(arr, from, to, isMutate));
+  return multiArr.map((arr) => move(arr, from, to, isMutate));
 }
 
 /**
@@ -69,7 +70,8 @@ function moveMultiIndex(arr = [], movingMap) {
 }
 
 module.exports = {
+  isNotInRange,
   move,
   moveMultiArr,
-  moveMultiIndex
+  moveMultiIndex,
 };
