@@ -93,22 +93,3 @@ npm test
 ## License
 
 This project is licensed under the [GPL-3.0 License](https://github.com/jalal246/move-position/blob/master/LICENSE)
-
-### Related projects
-
-- [packageSorter](https://github.com/jalal246/packageSorter) - Sorting packages
-  for monorepos production.
-
-- [builderz](https://github.com/jalal246/builderz) - Building your project with zero config.
-
-- [corename](https://github.com/jalal246/corename) - Extracts package name.
-
-- [get-info](https://github.com/jalal246/get-info) - Utility functions for
-  projects production.
-
-- [textics](https://github.com/jalal246/textics) &
-  [textics-stream](https://github.com/jalal246/textics-stream) - Counts lines,
-  words, chars and spaces for a given string.
-
-- [folo](https://github.com/jalal246/folo) - Form & Layout Components Built with
-  React.
