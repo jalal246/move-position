@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { expect } = require("chai");
 
-const { move, moveMultiArr, moveMultiIndex, isValid } = require("./index");
+const { move, moveMultiArr, moveMultiIndex, isValid } = require("../src");
 
 describe("move-position", () => {
   it("returns the same input when params is invalid", () => {
