@@ -1,7 +1,7 @@
 {
   "name": "move-position",
   "version": "1.0.3",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "https://github.com/jalal246/move-position.git",
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "LGPL-3.0",
@@ -9,7 +9,14 @@
     "test": "mocha"
   },
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^7.15.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "mocha": "^8.2.1"
+  },
   "files": [
     "src",
     "README.md"
