@@ -2,34 +2,9 @@
 
 const { expect } = require("chai");
 
-const { move, moveMultiArr, moveMultiIndex } = require("../lib");
+const { move } = require("../lib");
 
 describe("move", () => {
-  it("with mutation", () => {
-    const INPUT = ["a1", "b1", "c1"];
-
-    const result = move(INPUT, { from: 0, to: 2 });
-
-    const expected = ["b1", "c1", "a1"];
-
-    expect(result).to.have.ordered.members(expected);
-    expect(INPUT).to.have.ordered.members(expected);
-  });
-
-  it("without mutation", () => {
-    const INPUT = ["a1", "b1", "c1"];
-
-    const result = move(INPUT, { from: 0, to: 2, isMutate: false });
-
-    const expected = ["b1", "c1", "a1"];
-
-    expect(result).to.have.ordered.members(expected);
-    expect(INPUT).to.not.equal(expected);
-    expect(INPUT).to.have.ordered.members(["a1", "b1", "c1"]);
-  });
-});
-
-describe("moveMultiIndex", () => {
   describe("Do not mutate", () => {
     it("Enable Swap - default", () => {
       const INPUT = ["first", "second", "third", "fourth"];
@@ -38,7 +13,7 @@ describe("moveMultiIndex", () => {
 
       const expected = ["fourth", "second", "third", "first"];
 
-      const result = moveMultiIndex(INPUT, movingMap, { isSwap: true });
+      const result = move(INPUT, movingMap, { isSwap: true });
 
       expect(result).to.have.ordered.members(expected);
       expect(INPUT).to.not.equal(expected);
@@ -51,7 +26,7 @@ describe("moveMultiIndex", () => {
 
       const expected = ["first", "second", "third", "first"];
 
-      const result = moveMultiIndex(INPUT, movingMap);
+      const result = move(INPUT, movingMap);
 
       expect(result).to.have.ordered.members(expected);
       expect(INPUT).to.not.equal(expected);
@@ -64,7 +39,7 @@ describe("moveMultiIndex", () => {
 
       const expected = [null, "second", "third", "first"];
 
-      const result = moveMultiIndex(INPUT, movingMap, {
+      const result = move(INPUT, movingMap, {
         isDuplicate: false,
         isSwap: false,
       });
@@ -80,7 +55,7 @@ describe("moveMultiIndex", () => {
 
       const expected = ["emptiness", "second", "third", "first"];
 
-      const result = moveMultiIndex(INPUT, movingMap, {
+      const result = move(INPUT, movingMap, {
         fill: "emptiness",
       });
 
@@ -97,7 +72,7 @@ describe("moveMultiIndex", () => {
 
       const expected = ["first", "second", "third", "first"];
 
-      const result = moveMultiIndex(INPUT, movingMap, { isMutate: true });
+      const result = move(INPUT, movingMap, { isMutate: true });
 
       expect(result).to.have.ordered.members(expected);
       expect(INPUT).to.have.ordered.members(expected);
@@ -110,7 +85,7 @@ describe("moveMultiIndex", () => {
 
       const expected = ["fourth", "second", "third", "first"];
 
-      const result = moveMultiIndex(INPUT, movingMap, {
+      const result = move(INPUT, movingMap, {
         isMutate: true,
         isSwap: true,
       });
@@ -126,7 +101,7 @@ describe("moveMultiIndex", () => {
 
       const expected = [null, "second", "third", "first"];
 
-      const result = moveMultiIndex(INPUT, movingMap, {
+      const result = move(INPUT, movingMap, {
         isMutate: true,
         isDuplicate: false,
         isSwap: false,
@@ -143,7 +118,7 @@ describe("moveMultiIndex", () => {
 
       const expected = ["emptiness", "second", "third", "first"];
 
-      const result = moveMultiIndex(INPUT, movingMap, {
+      const result = move(INPUT, movingMap, {
         isMutate: true,
         fill: "emptiness",
       });
@@ -191,7 +166,7 @@ describe("moveMultiIndex", () => {
 //       { from: 1, to: 2 },
 //       { from: 0, to: 3 },
 //     ];
-//     const result = moveMultiIndex(input, movingMap);
+//     const result = move(input, movingMap);
 //     const expected = [
 //       "folo-utils",
 //       "folo-withcontext",
