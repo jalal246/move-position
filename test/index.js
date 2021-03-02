@@ -1,134 +1,137 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-const { expect } = require("chai");
+// // eslint-disable-next-line import/no-extraneous-dependencies
 
-const { move, moveMultiArr, moveMultiIndex, isValid } = require("../src");
+// // @ts-check
 
-describe("move-position", () => {
-  it("returns the same input when params is invalid", () => {
-    const input = ["a1", "b1", "c1"];
+// const { expect } = require("chai");
 
-    const result1 = move(input, "0", "2");
-    expect(result1).to.have.ordered.members(input);
+// const { move, moveMultiArr, moveMultiIndex, isValid } = require("../lib");
 
-    const result2 = move(input, 0, 10);
-    expect(result2).to.have.ordered.members(input);
-  });
+// describe("move-position", () => {
+//   it("returns the same input when params is invalid", () => {
+//     const input = ["a1", "b1", "c1"];
 
-  it("moves with mutation (default)", () => {
-    const input = ["a1", "b1", "c1"];
+//     const result1 = move(input, "0", "2");
+//     expect(result1).to.have.ordered.members(input);
 
-    const result = move(input, 0, 2);
+//     const result2 = move(input, 0, 10);
+//     expect(result2).to.have.ordered.members(input);
+//   });
 
-    const expected = ["b1", "c1", "a1"];
+//   it("moves with mutation (default)", () => {
+//     const input = ["a1", "b1", "c1"];
 
-    expect(result).to.have.ordered.members(expected);
-    expect(input).to.have.ordered.members(expected);
-  });
+//     const result = move(input, 0, 2);
 
-  it("moves without mutation", () => {
-    const input = ["a1", "b1", "c1"];
+//     const expected = ["b1", "c1", "a1"];
 
-    const result = move(input, 0, 2, false);
+//     expect(result).to.have.ordered.members(expected);
+//     expect(input).to.have.ordered.members(expected);
+//   });
 
-    const expected = ["b1", "c1", "a1"];
-    expect(result).to.have.ordered.members(expected);
-    expect(input).to.have.ordered.members(input);
-  });
+//   it("moves without mutation", () => {
+//     const input = ["a1", "b1", "c1"];
 
-  it("moves multiple arrays with mutation (default)", () => {
-    const input1 = ["a1", "b1", "c1"];
-    const input2 = ["a2", "b2", "c2"];
+//     const result = move(input, 0, 2, false);
 
-    const total = [input1, input2];
+//     const expected = ["b1", "c1", "a1"];
+//     expect(result).to.have.ordered.members(expected);
+//     expect(input).to.have.ordered.members(input);
+//   });
 
-    const result = moveMultiArr(total, 2, 0);
+//   it("moves multiple arrays with mutation (default)", () => {
+//     const input1 = ["a1", "b1", "c1"];
+//     const input2 = ["a2", "b2", "c2"];
 
-    const expectedInput1 = ["c1", "a1", "b1"];
-    const expectedInput2 = ["c2", "a2", "b2"];
+//     const total = [input1, input2];
 
-    expect(result[0]).to.have.ordered.members(expectedInput1);
-    expect(result[1]).to.have.ordered.members(expectedInput2);
-    expect(input1).to.have.ordered.members(result[0]);
-  });
+//     const result = moveMultiArr(total, 2, 0);
 
-  it("moves multiple arrays without mutation", () => {
-    const input1 = ["a1", "b1", "c1"];
-    const input2 = ["a2", "b2", "c2"];
+//     const expectedInput1 = ["c1", "a1", "b1"];
+//     const expectedInput2 = ["c2", "a2", "b2"];
 
-    const total = [input1, input2];
+//     expect(result[0]).to.have.ordered.members(expectedInput1);
+//     expect(result[1]).to.have.ordered.members(expectedInput2);
+//     expect(input1).to.have.ordered.members(result[0]);
+//   });
 
-    const result = moveMultiArr(total, 2, 0, false);
+//   it("moves multiple arrays without mutation", () => {
+//     const input1 = ["a1", "b1", "c1"];
+//     const input2 = ["a2", "b2", "c2"];
 
-    const expectedInput1 = ["c1", "a1", "b1"];
+//     const total = [input1, input2];
 
-    expect(result[0]).to.have.deep.members(expectedInput1);
-    expect(input1).to.not.have.ordered.members(result[0]);
-  });
+//     const result = moveMultiArr(total, 2, 0, false);
 
-  it("tests with movingMap: Apply multi changes to same array", () => {
-    const input = [
-      "folo-forms",
-      "folo-layout",
-      "folo-utils",
-      "folo-withcontext",
-    ];
+//     const expectedInput1 = ["c1", "a1", "b1"];
 
-    const movingMap = [
-      { from: 2, to: 0 },
-      { from: 3, to: 1 },
-      { from: 1, to: 2 },
-      { from: 0, to: 3 },
-    ];
+//     expect(result[0]).to.have.deep.members(expectedInput1);
+//     expect(input1).to.not.have.ordered.members(result[0]);
+//   });
 
-    const result = moveMultiIndex(input, movingMap);
+//   it("tests with movingMap: Apply multi changes to same array", () => {
+//     const input = [
+//       "folo-forms",
+//       "folo-layout",
+//       "folo-utils",
+//       "folo-withcontext",
+//     ];
 
-    const expected = [
-      "folo-utils",
-      "folo-withcontext",
-      "folo-layout",
-      "folo-forms",
-    ];
+//     const movingMap = [
+//       { from: 2, to: 0 },
+//       { from: 3, to: 1 },
+//       { from: 1, to: 2 },
+//       { from: 0, to: 3 },
+//     ];
 
-    expect(result).to.have.deep.members(expected);
-  });
-});
+//     const result = moveMultiIndex(input, movingMap);
 
-describe("tests validation", () => {
-  describe("detects invalid returns false:", () => {
-    it("when not array", () => {
-      const result = isValid("foo");
-      expect(result).to.be.equal(false);
-    });
+//     const expected = [
+//       "folo-utils",
+//       "folo-withcontext",
+//       "folo-layout",
+//       "folo-forms",
+//     ];
 
-    it("when array is empty", () => {
-      const result = isValid([]);
-      expect(result).to.be.equal(false);
-    });
+//     expect(result).to.have.deep.members(expected);
+//   });
+// });
 
-    it("when from/to is out of range", () => {
-      let result = isValid([1, 2, 3], { from: -4, to: 0 });
-      expect(result).to.be.equal(false);
+// // describe("tests validation", () => {
+// //   describe("detects invalid returns false:", () => {
+// //     it("when not array", () => {
+// //       const result = isValid("foo");
+// //       expect(result).to.be.equal(false);
+// //     });
 
-      result = isValid([1, 2, 3], { from: 4, to: 0 });
-      expect(result).to.be.equal(false);
+// //     it("when array is empty", () => {
+// //       const result = isValid([]);
+// //       expect(result).to.be.equal(false);
+// //     });
 
-      result = isValid([1, 2, 3], { from: 1, to: 6 });
-      expect(result).to.be.equal(false);
+// //     it("when from/to is out of range", () => {
+// //       let result = isValid([1, 2, 3], { from: -4, to: 0 });
+// //       expect(result).to.be.equal(false);
 
-      result = isValid([1, 2, 3], { from: 1, to: -6 });
-      expect(result).to.be.equal(false);
-    });
+// //       result = isValid([1, 2, 3], { from: 4, to: 0 });
+// //       expect(result).to.be.equal(false);
 
-    it("when from/to is not numbers", () => {
-      const result = isValid([1, 2, 3], { from: "1", to: "0" });
-      expect(result).to.be.equal(false);
-    });
-  });
+// //       result = isValid([1, 2, 3], { from: 1, to: 6 });
+// //       expect(result).to.be.equal(false);
 
-  describe("detects valid returns true:", () => {
-    it("when valid array", () => {
-      const result = isValid([1, 2, 3], { from: 0, to: 1 });
-      expect(result).to.be.equal(true);
-    });
-  });
-});
+// //       result = isValid([1, 2, 3], { from: 1, to: -6 });
+// //       expect(result).to.be.equal(false);
+// //     });
+
+// //     it("when from/to is not numbers", () => {
+// //       const result = isValid([1, 2, 3], { from: "1", to: "0" });
+// //       expect(result).to.be.equal(false);
+// //     });
+// //   });
+
+// //   describe("detects valid returns true:", () => {
+// //     it("when valid array", () => {
+// //       const result = isValid([1, 2, 3], { from: 0, to: 1 });
+// //       expect(result).to.be.equal(true);
+// //     });
+// //   });
+// // });

@@ -1,40 +1,53 @@
-/**
- * validator
- *
- * @param {Array} arr - array to validate
- * @param {number} from - targeted index
- * @param {number} to - targeted index
- * @returns
- */
-function isNotInRange(arr, { from, to } = {}) {
-  const { length } = arr;
-
-  return (
-    !Array.isArray(arr) ||
-    typeof from !== "number" ||
-    typeof to !== "number" ||
-    from < 0 ||
-    to < 0 ||
-    to > length ||
-    from > length
-  );
+interface ArrayRange {
+  from: number;
+  to: number;
 }
 
-function isValid(arr, form2Obj) {
-  return !isNotInRange.call(this, arr, form2Obj);
+interface MoveOpts extends ArrayRange {
+  isMutate?: boolean;
+}
+
+/**
+ * Converts input to an array
+ *
+ * @param input
+ */
+function toArray<T>(input: T | T[]) {
+  if (input === null || input === undefined) {
+    return [];
+  }
+
+  return Array.isArray(input) ? input : [input];
+}
+
+/**
+ * Validate array and its range.
+ *
+ * @param arr
+ * @param arrayRangeObj
+ */
+function isValid<T>(arr: T[], { from, to }: ArrayRange) {
+  return (
+    Array.isArray(arr) &&
+    typeof from === "number" &&
+    typeof to === "number" &&
+    from >= 0 &&
+    to >= 0 &&
+    from < arr.length &&
+    to < arr.length
+  );
 }
 
 /**
  * Moves element form/to index.
  *
- * @param {Array} [arr=[]]
- * @param {number} from
- * @param {number} to
- * @param {boolean} [isMutate=true]
- * @returns {Array}
+ * @param arr
+ * @param opts
  */
-function move(arr = [], from, to, isMutate = true) {
-  if (isNotInRange(arr, { from, to })) return arr;
+function move<T>(arr: T[] = [], { from, to, isMutate = true }: MoveOpts) {
+  if (!isValid(arr, { from, to })) {
+    throw new Error(`Input:is not valid!`);
+  }
 
   const modified = isMutate ? arr : arr.slice();
 
@@ -43,37 +56,62 @@ function move(arr = [], from, to, isMutate = true) {
   return modified;
 }
 
-/**
- * Moves the same index in multiple arrays
- *
- * @param {Array} [arr=[]] Array contain arrays to be changed
- * @param {number} from - targeted index
- * @param {number} to - targeted index
- * @param {boolean} [isMutate=true]
- * @returns {Array}
- */
-function moveMultiArr(multiArr, from, to, isMutate) {
-  return multiArr.map((arr) => move(arr, from, to, isMutate));
+interface moveMultiIndexOpts<T> {
+  isMutate?: boolean;
+  isDuplicate?: boolean;
+  isSwap?: boolean;
+  fill?: T;
 }
 
 /**
- * Moves multiple indexes in the same array.
+ * Moves multiple indexes in the same array
  *
- * @param {Array} [arr=[]]
- * @param {{ from, to }[]} movingMap
- * @returns {Array} new Array with index changes
+ * @param arr
+ * @param movingMap
+ * @param opts
  */
-function moveMultiIndex(arr = [], movingMap) {
-  const modified = arr.slice();
+function moveMultiIndex<T>(
+  arr: T[] = [],
+  movingMap: ArrayRange[],
+  {
+    isMutate = false,
+    isDuplicate = true,
+    isSwap = false,
+    fill,
+  }: moveMultiIndexOpts<T> = {}
+) {
+  const modified = isMutate ? arr : arr.slice();
 
   movingMap.forEach(({ from, to }) => {
+    const draft = modified[to];
     modified[to] = arr[from];
+
+    if (isSwap) {
+      modified[to] = arr[from];
+      modified[from] = draft;
+    } else if (fill) {
+      modified[from] = fill;
+    } else if (!isDuplicate) {
+      // @ts-expect-error
+      modified[from] = null;
+    }
   });
 
   return modified;
 }
 
-module.exports = {
+/**
+ * Moves the same index in multiple arrays
+ *
+ * @param multiArr
+ * @param param1
+ */
+function moveMultiArr<T>(multiArr: T[][], { from, to, isMutate }: MoveOpts) {
+  return multiArr.map((arr: T[]) => move<T>(arr, { from, to, isMutate }));
+}
+
+export = {
+  toArray,
   isValid,
   move,
   moveMultiArr,
