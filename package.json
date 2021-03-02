@@ -1,25 +1,30 @@
 {
   "name": "move-position",
   "version": "1.0.4",
-  "main": "src/index.js",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "repository": "https://github.com/jalal246/move-position.git",
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "LGPL-3.0",
   "scripts": {
+    "build": "tsc",
+    "pretest": "yarn build",
     "test": "mocha"
   },
   "dependencies": {},
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
     "chai": "^4.2.0",
-    "eslint": "^7.19.0",
+    "eslint": "^7.20.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-import": "^2.22.1",
-    "mocha": "^8.2.1"
+    "mocha": "^8.3.0",
+    "typescript": "^4.1.5"
   },
   "files": [
-    "src",
-    "README.md"
+    "lib"
   ],
   "keywords": [
     "move-position",
