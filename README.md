@@ -1,7 +1,7 @@
 # move-position
 
-> Move element in a given array from one Index to another..with some extra
-> functionalities.
+> Move element in a given array from one index to another ..with some extra
+> functions.
 
 ```bash
 npm install move-position
