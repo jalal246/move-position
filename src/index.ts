@@ -120,32 +120,54 @@ function flatten<T>(unFlatten: T[] = []) {
   return flattenRec(unFlatten);
 }
 
-// function diff(arr /* , arrays */) {
-//   const len = arguments.length;
-//   let idx = 0;
-//   while (++idx < len) {
-//     arr = diffArray(arr, arguments[idx]);
-//   }
-//   return arr;
-// }
-
-function getDiff<T>(arr1: T[], arr2: T[]) {
-  const arrDiff = [];
-
+function getDiffMeta<T>(arr1: T[], arr2: T[], acc: T[] = []) {
   for (let i = 0; i < arr1.length; i += 1) {
     const elm = arr1[i];
 
-    for (let j = 0; j < arr2.length; j += 1) {
-      if (elm === arr2[j]) break;
+    let hasDiff = true;
 
-      arrDiff.push(elm);
+    for (let j = 0; j < arr2.length; j += 1) {
+      if (arr1[i] === arr2[j]) {
+        hasDiff = false;
+        break;
+      }
+    }
+
+    if (hasDiff) {
+      acc.push(elm);
     }
   }
 
-  return arrDiff;
+  return acc;
+}
+
+function getDiff<T>(...args: T[][]) {
+  let diff: T[] = args[0];
+
+  for (let i = 1; i < args.length; i += 1) {
+    diff = getDiffMeta(diff, args[i]);
+  }
+
+  return diff;
+}
+
+function compareMeta<T>(arr1: T[], arr2: T[], acc: T[] = []) {
+  const firstDiff = getDiffMeta(arr1, arr2, acc);
+  return getDiffMeta(arr2, arr1, firstDiff);
+}
+
+function compareBoth<T>(...args: T[][]) {
+  let acc = args[0];
+
+  for (let i = 1; i < args.length; i += 1) {
+    acc = compareMeta(acc, args[i]);
+  }
+
+  return acc;
 }
 
 export = {
+  compareBoth,
   getDiff,
   flatten,
   toArray,
