@@ -42,7 +42,7 @@ jobs:
         run: yarn eslint .
 
   test:
-    name: Unit Test On Ubuntu
+    name: Unit Test
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
