@@ -71,8 +71,8 @@ function move<T>(
   movingMap: ArrayRange | ArrayRange[],
   {
     isMutate = false,
-    isDuplicate = true,
-    isSwap = false,
+    isDuplicate = false,
+    isSwap = true,
     fill,
   }: MoveOpts<T> = {}
 ) {
@@ -84,14 +84,15 @@ function move<T>(
     const draft = modified[to];
     modified[to] = arr[from];
 
-    if (isSwap) {
+    if (isDuplicate) {
       modified[to] = arr[from];
-      modified[from] = draft;
     } else if (fill) {
       modified[from] = fill;
-    } else if (!isDuplicate) {
+    } else if (!isSwap) {
       // @ts-expect-error
       modified[from] = null;
+    } else {
+      modified[from] = draft;
     }
   });
 
@@ -120,7 +121,7 @@ function flatten<T>(unFlatten: T[] = []) {
   return flattenRec(unFlatten);
 }
 
-function getDiffMeta<T>(arr1: T[], arr2: T[], acc: T[] = []) {
+function compareOneMeta<T>(arr1: T[], arr2: T[], acc: T[] = []) {
   for (let i = 0; i < arr1.length; i += 1) {
     const elm = arr1[i];
 
@@ -141,19 +142,19 @@ function getDiffMeta<T>(arr1: T[], arr2: T[], acc: T[] = []) {
   return acc;
 }
 
-function getDiff<T>(...args: T[][]) {
+function compare<T>(...args: T[][]) {
   let diff: T[] = args[0];
 
   for (let i = 1; i < args.length; i += 1) {
-    diff = getDiffMeta(diff, args[i]);
+    diff = compareOneMeta(diff, args[i]);
   }
 
   return diff;
 }
 
 function compareMeta<T>(arr1: T[], arr2: T[], acc: T[] = []) {
-  const firstDiff = getDiffMeta(arr1, arr2, acc);
-  return getDiffMeta(arr2, arr1, firstDiff);
+  const firstDiff = compareOneMeta(arr1, arr2, acc);
+  return compareOneMeta(arr2, arr1, firstDiff);
 }
 
 function compareBoth<T>(...args: T[][]) {
@@ -168,7 +169,7 @@ function compareBoth<T>(...args: T[][]) {
 
 export = {
   compareBoth,
-  getDiff,
+  compare,
   flatten,
   toArray,
   move,
