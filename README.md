@@ -18,7 +18,7 @@ npm install move-position
 ## move
 
 > Moves element form one index to another with ability to fill each position and
-> mutate array.
+> mutate the input array.
 
 ```js
 function move<T>(
@@ -92,7 +92,7 @@ const INPUT = ["first", "second", "third", "fourth"];
 const movingMap = [{ from: 0, to: 3 }];
 const result = move(INPUT, movingMap, {
   fill: "emptiness"
-  });
+});
 
 >> result = ["emptiness", "second", "third", "first"];
 ```
@@ -174,9 +174,6 @@ This project is licensed under the [GPL-3.0 License](https://github.com/jalal246
 ### Related projects
 
 - [builderz](https://github.com/jalal246/builderz) - Zero Configuration JS bundler.
-
-- [packageSorter](https://github.com/jalal246/packageSorter) - Sorting packages
-  for monorepos production.
 
 - [validate-access](https://github.com/jalal246/https://github.com/jalal246/validate-access) - Utility functions, parse and validate a given directory with multiple entries.
 
