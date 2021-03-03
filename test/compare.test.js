@@ -2,51 +2,51 @@
 
 const { expect } = require("chai");
 
-const { getDiff } = require("../lib");
+const { compare } = require("../lib");
 
-describe("getDiff", () => {
+describe("compare", () => {
   it("Should Pass", () => {
-    const res = getDiff(["a", "b", "c"], ["b", "c", "e"]);
+    const res = compare(["a", "b", "c"], ["b", "c", "e"]);
     expect(res).to.have.ordered.members(["a"]);
   });
 
   it("Should Pass", () => {
-    const res = getDiff(["x", "b", "c", "e", "y"], ["b", "x", "e"]);
+    const res = compare(["x", "b", "c", "e", "y"], ["b", "x", "e"]);
     expect(res).to.have.ordered.members(["c", "y"]);
   });
 
   it("Should Pass", () => {
-    const res = getDiff(["x", "x"], ["a", "b", "c"]);
+    const res = compare(["x", "x"], ["a", "b", "c"]);
     expect(res).to.have.ordered.members(["x", "x"]);
   });
 
   it("Should Pass", () => {
-    const res = getDiff(["x"], ["a", "b", "c"]);
+    const res = compare(["x"], ["a", "b", "c"]);
     expect(res).to.have.ordered.members(["x"]);
   });
 
   it("Should Pass", () => {
-    const res = getDiff(["x", "b", "b", "b", "c", "e", "y"], ["x", "e"]);
+    const res = compare(["x", "b", "b", "b", "c", "e", "y"], ["x", "e"]);
     expect(res).to.have.ordered.members(["b", "b", "b", "c", "y"]);
   });
 
   it("Should Pass", () => {
-    const res = getDiff(["a", "b", "b", "b", "b"], ["b"]);
+    const res = compare(["a", "b", "b", "b", "b"], ["b"]);
     expect(res).to.have.ordered.members(["a"]);
   });
 
   it("Should Pass", () => {
-    const res = getDiff(["a"], ["a", "b", "c"]);
+    const res = compare(["a"], ["a", "b", "c"]);
     expect(res).to.have.ordered.members([]);
   });
 
   it("Should Pass", () => {
-    const res = getDiff(["a", "b", "c"], []);
+    const res = compare(["a", "b", "c"], []);
     expect(res).to.have.ordered.members(["a", "b", "c"]);
   });
 
   it("Should Pass", () => {
-    const res = getDiff(["a", "b", "c"], ["a"], ["b"]);
+    const res = compare(["a", "b", "c"], ["a"], ["b"]);
 
     expect(res).to.have.ordered.members(["c"]);
   });
