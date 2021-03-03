@@ -13,7 +13,7 @@ describe("move", () => {
 
       const expected = ["fourth", "second", "third", "first"];
 
-      const result = move(INPUT, movingMap, { isSwap: true });
+      const result = move(INPUT, movingMap);
 
       expect(result).to.have.ordered.members(expected);
       expect(INPUT).to.not.equal(expected);
@@ -26,7 +26,7 @@ describe("move", () => {
 
       const expected = ["first", "second", "third", "first"];
 
-      const result = move(INPUT, movingMap);
+      const result = move(INPUT, movingMap, { isDuplicate: true });
 
       expect(result).to.have.ordered.members(expected);
       expect(INPUT).to.not.equal(expected);
@@ -72,7 +72,10 @@ describe("move", () => {
 
       const expected = ["first", "second", "third", "first"];
 
-      const result = move(INPUT, movingMap, { isMutate: true });
+      const result = move(INPUT, movingMap, {
+        isMutate: true,
+        isDuplicate: true,
+      });
 
       expect(result).to.have.ordered.members(expected);
       expect(INPUT).to.have.ordered.members(expected);

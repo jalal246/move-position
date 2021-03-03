@@ -71,8 +71,8 @@ function move<T>(
   movingMap: ArrayRange | ArrayRange[],
   {
     isMutate = false,
-    isDuplicate = true,
-    isSwap = false,
+    isDuplicate = false,
+    isSwap = true,
     fill,
   }: MoveOpts<T> = {}
 ) {
@@ -84,14 +84,15 @@ function move<T>(
     const draft = modified[to];
     modified[to] = arr[from];
 
-    if (isSwap) {
+    if (isDuplicate) {
       modified[to] = arr[from];
-      modified[from] = draft;
     } else if (fill) {
       modified[from] = fill;
-    } else if (!isDuplicate) {
+    } else if (!isSwap) {
       // @ts-expect-error
       modified[from] = null;
+    } else {
+      modified[from] = draft;
     }
   });
 

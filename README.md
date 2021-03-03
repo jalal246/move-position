@@ -25,9 +25,9 @@ function move<T>(
   arr: T[] = [],
   movingMap: ArrayRange | ArrayRange[],
   {
+    isSwap = true,
     isMutate = false,
-    isDuplicate = true,
-    isSwap = false,
+    isDuplicate = false,
     fill,
   }: MoveOpts<T> = {}
 )
@@ -53,21 +53,21 @@ Trying default options:
 const INPUT = ["first", "second", "third", "fourth"];
 
 const movingMap = [{ from: 0, to: 3 }];
-const result = move(INPUT, movingMap);
+const result = move(INPUT, movingMap, { isSwap: true });
 
-//
->> result= ["first", "second", "third", "first"];
+>> result= ["fourth", "second", "third", "first"];
 ```
 
-With `isSwap:true`:
+Enables `isDuplicate:true`:
 
 ```js
 const INPUT = ["first", "second", "third", "fourth"];
 
 const movingMap = [{ from: 0, to: 3 }];
-const result = move(INPUT, movingMap, { isSwap: true });
+const result = move(INPUT, movingMap, { isDuplicate: true });
 
->> result= ["fourth", "second", "third", "first"];
+//
+>> result= ["first", "second", "third", "first"];
 ```
 
 With nullish:
