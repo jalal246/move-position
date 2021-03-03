@@ -24,12 +24,7 @@ npm install move-position
 function move<T>(
   arr: T[] = [],
   movingMap: ArrayRange | ArrayRange[],
-  {
-    isSwap = true,
-    isMutate = false,
-    isDuplicate = false,
-    fill,
-  }: MoveOpts<T> = {}
+  MoveOpts<T> = {}
 )
 ```
 
