@@ -53,7 +53,7 @@ Trying default options:
 const INPUT = ["first", "second", "third", "fourth"];
 
 const movingMap = [{ from: 0, to: 3 }];
-const result = move(INPUT, movingMap, { isSwap: true });
+const result = move(INPUT, movingMap);
 
 >> result= ["fourth", "second", "third", "first"];
 ```
