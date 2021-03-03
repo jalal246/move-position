@@ -169,7 +169,7 @@ npm test
 
 ## License
 
-This project is licensed under the [GPL-3.0 License](https://github.com/jalal246/move-position/blob/master/LICENSE)
+This project is licensed under the [MIT](https://github.com/jalal246/move-position/blob/master/LICENSE)
 
 ### Related projects
 
