@@ -97,7 +97,7 @@ describe("move", () => {
     it("Enable Nullish", () => {
       const INPUT = ["first", "second", "third", "fourth"];
 
-      const movingMap = [{ from: 0, to: 3 }];
+      const movingMap = { from: 0, to: 3 };
 
       const expected = [null, "second", "third", "first"];
 
