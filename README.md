@@ -24,7 +24,7 @@ npm install move-position
 function move<T>(
   arr: T[] = [],
   movingMap: ArrayRange | ArrayRange[],
-  MoveOpts<T> = {}
+  Opts<T> = {}
 )
 ```
 
@@ -33,7 +33,7 @@ function move<T>(
   - `from: number` - Target index.
   - `to: number` - Destination index.
 
-- `MoveOpts` object contains:
+- `Opts` object contains:
 
   - `isMutate?: boolean` - Default `true` - Mutate array input or create new one.
   - `isDuplicate?: boolean` - Default `false` - Duplicate the traveled element or not.
