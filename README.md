@@ -1,6 +1,7 @@
 # move-position
 
-> Move element in a given array from one Index to another. It can be implemented for one array or multiple arrays with multiple indexes.
+> Move element in a given array from one index to another ..with some extra
+> functions.
 
 ```bash
 npm install move-position
@@ -8,99 +9,151 @@ npm install move-position
 
 ## API
 
-### move
+- [move](#move)
+- [getDiff](#getDiff)
+- [compareBoth](#compareBoth)
+- [flatten](#flatten)
+- [toArray](#toArray)
 
-Moves element form one index to another
+## move
 
-```js
-move(targetedArr: Array, from: number, to: number, isMutate?: boolean)
-```
-
-If mutate true:
-
-```js
-const input = ["a", "b", "c"];
-
-// move element form index=0, to index=2
-const result = move(input, 0, 2);
-
-// ["b", "c", "a"];
-```
-
-Since `isMutate` is `true` by default:
+> Moves element form one index to another with ability to fill each position and
+> mutate the input array.
 
 ```js
-input === result; // true
+function move<T>(
+  arr: T[] = [],
+  movingMap: ArrayRange | ArrayRange[],
+  Opts<T> = {}
+)
 ```
 
-When mutate is false:
+- `ArrayRange` object contains:
+
+  - `from: number` - Target index.
+  - `to: number` - Destination index.
+
+- `Opts` object contains:
+
+  - `isMutate?: boolean` - Default `true` - Mutate array input or create new one.
+  - `isDuplicate?: boolean` - Default `false` - Duplicate the traveled element or not.
+  - `isSwap?: boolean` - Default `false` - Swap between array elements.
+  - `fill?: T` - Fill the original position with a value.
+
+### Example - `move`
+
+Trying default options:
 
 ```js
-const result = move(input, 0, 2, false);
+const INPUT = ["first", "second", "third", "fourth"];
 
-input === result; // false
+const movingMap = [{ from: 0, to: 3 }];
+const result = move(INPUT, movingMap);
+
+>> result= ["fourth", "second", "third", "first"];
 ```
 
-### moveMultiArr
-
-Moves the same index in multiple arrays
+Enables `isDuplicate:true`:
 
 ```js
-moveMultiArr(targetedArr: Array<Array>, from: number, to: number, isMutate?: boolean)
+const INPUT = ["first", "second", "third", "fourth"];
+
+const movingMap = [{ from: 0, to: 3 }];
+const result = move(INPUT, movingMap, { isDuplicate: true });
+
+//
+>> result= ["first", "second", "third", "first"];
 ```
 
-Iteration through multiple arrays can easily be done with one step only as following:
+With nullish:
 
 ```js
-const input1 = ["a1", "b1", "c1"];
-const input2 = ["a2", "b2", "c2"];
+const INPUT = ["first", "second", "third", "fourth"];
 
-const result = moveMultiArr([input1, input2], 2, 0);
+const movingMap = [{ from: 0, to: 3 }];
+const result = move(INPUT, movingMap, {
+  isDuplicate: false,
+  isSwap: false,
+});
 
-// result = [
-//   ["c1", "a1", "b1"],
-//   ["c2", "a2", "b2"],
-// ];
+>> result = [null, "second", "third", "first"];
 ```
 
-### moveMultiIndex
-
-```ts
-moveMultiArr(targetedArr: Array, movingMap: Array <FromToObj>)
-```
-
-Think about `FromToObj` as a map helps to navigate each element to its new position:
+With custom fill:
 
 ```js
-const input = ["a", "b", "c"];
+const INPUT = ["first", "second", "third", "fourth"];
 
-const FromToObj = [
-  { from: 0, to: 2 },
-  { from: 2, to: 1 },
-];
+const movingMap = [{ from: 0, to: 3 }];
+const result = move(INPUT, movingMap, {
+  fill: "emptiness"
+});
 
-const result = moveMultiIndex(input, FromToObj);
-
-// result = ["a", "c", "a"];
+>> result = ["emptiness", "second", "third", "first"];
 ```
 
-Validation function is also exported:
+## compare
 
-`isValid(array, { from, to })` and it returns `false` when:
-
-- input is not array
-- input array is empty
-- from/to is out of range
-- from/to is not numbers
+> Compare elements of the first array with the rest of arrays.
 
 ```js
-isValid([1, 2, 3], { from: 0, to: 1 });
+function compare<T>(...args: T[][])
+```
 
-// true
+### Example - `compare`
 
-isValid([1, 2, 3], { from: 10, to: 1 });
+```js
+const diff = compare(["a", "b", "c"], ["b", "c", "e"]);
 
-// false
+> diff = ["a"]
+```
+
+## compareBoth
+
+> Compare elements in all inputs and gets the difference.
+
+```js
+function compareBoth<T>(...args: T[][])
+```
+
+### Example - `compareBoth`
+
+```js
+const allDiff = compareBoth(["a", "b", "c"], ["b", "c", "e"]);
+
+> allDiff = ["a", "e"]
+```
+
+## flatten
+
+> Flatten an array
+
+```js
+function flatten<T>(unFlatten: T[])
+```
+
+### Example - `flatten`
+
+```js
+const flattened = flatten([[1, [2, 3]], [1, [2, 3]], 0]);
+
+> flattened = [1, 2, 3, 1, 2, 3, 0]
+```
+
+## toArray
+
+> Convert an input to array
+
+```js
+function flatten<T>(unFlatten: T[])
+```
+
+### Example - `toArray`
+
+```js
+const array = toArray("a");
+
+> array = ["a"]
 ```
 
 ## Tests
@@ -111,4 +164,18 @@ npm test
 
 ## License
 
-This project is licensed under the [GPL-3.0 License](https://github.com/jalal246/move-position/blob/master/LICENSE)
+This project is licensed under the [MIT](https://github.com/jalal246/move-position/blob/master/LICENSE)
+
+### Related projects
+
+- [builderz](https://github.com/jalal246/builderz) - Zero Configuration JS bundler.
+
+- [validate-access](https://github.com/jalal246/https://github.com/jalal246/validate-access) - Utility functions, parse and validate a given directory with multiple entries.
+
+- [get-info](https://github.com/jalal246/get-info) - Utility functions for projects production.
+
+- [textics](https://github.com/jalal246/textics) &
+  [textics-stream](https://github.com/jalal246/textics-stream) - Counts lines,
+  words, chars and spaces for a given string.
+
+> Support this package by giving it a Star ⭐

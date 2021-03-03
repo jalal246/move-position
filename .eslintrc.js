@@ -1,17 +1,18 @@
 module.exports = {
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: 12,
+    sourceType: "module",
+  },
   env: {
-    browser: false,
-    commonjs: true,
+    browser: true,
     es2021: true,
   },
   extends: ["airbnb-base", "prettier"],
-  parserOptions: {
-    ecmaVersion: 12,
-  },
+  plugins: ["@typescript-eslint"],
   globals: {
     describe: true,
     it: true,
     expect: true,
   },
-  rules: {},
 };

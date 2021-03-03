@@ -1,8 +1,2 @@
 node_modules
-*.log
-.changelog
-build
-dist
-draft
-scripts
-react
+/lib
